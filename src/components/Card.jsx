@@ -1,23 +1,48 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Card = ({ img }) => {
-    return (
-        <>
-            <div className="border rounded-2xl p-4 shadow-sm hover:shadow-md transition bg-white">
-                <img src="/vite.svg" alt="img" className="rounded-xl w-full h-52 object-cover" />
-                <h2 className="font-bold text-lg mt-4">Lorem ipsum dolor sit amet</h2>
-                <p className="text-gray-500 text-sm mt-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div className="flex items-center gap-2 mt-4 text-gray-500 text-sm">
-                    <span className="flex items-center gap-1">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>12
-                    </span>
-                    <span className="flex items-center gap-1">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 20l9-16H3z" /></svg>
-                    </span>
-                </div>
-            </div>
-        </>
-    )
-}
+const Card = ({ id, image, title, body }) => {
+  return (
+    <Link
+      to={`/post/${id}`}
+      state={{ id, image, title, body }}
+      className="block transform hover:scale-105 transition-all duration-300"
+    >
+      <div className="flex flex-col bg-white rounded-xl shadow-xl overflow-hidden h-full transition-transform hover:shadow-2xl">
+        {/* Картинка */}
+        <div className="h-56 overflow-hidden">
+          {image && (
+            <img
+              src={image}
+              alt="Post"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
+          )}
+        </div>
 
-export default Card
+        {/* Контент карточки */}
+        <div className="flex flex-col p-4 h-full">
+          <h2 className="font-semibold text-lg text-gray-800 mb-2">{title}</h2>
+          <p className="text-gray-500 text-sm mb-4 truncate">{body}</p>
+          <div className="mt-auto flex items-center justify-between text-gray-500 text-sm">
+            <span className="flex items-center gap-1">
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              12
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default Card;
